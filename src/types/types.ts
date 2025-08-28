@@ -1,22 +1,28 @@
 export interface Product {
-    id: string;
-    title: string;
-    price: number;
-    description: string;
-    category: string;
-    image: string;
-    rating: {
-        rate: number;
-        count: number;
-    };
+  id: string;
+  title: string;
+  price: number;
+  category: string;
+  description: string;
+  image: string;
+  rating: { rate: number; count: number };
+}
+
+export interface CartItem extends Product {
+  quantity: number;
 }
 
 export interface Order {
-    id: string;
-    userId: string;
-    items: Array<Product & { quantity: number }>;
-    totalPrice: number;
-    createdAt: string;
+  id: string;
+  userId: string;
+  products: CartItem[];
+  total: number;
+  date: Date;
 }
 
-export type Category = string;
+export interface User {
+  id: string;
+  email: string;
+  name?: string;
+  address?: string;
+}
