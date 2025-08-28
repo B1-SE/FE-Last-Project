@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { store } from './redux/store';
@@ -11,12 +11,13 @@ import Cart from './components/Cart';
 import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
-import ProductForm from './components/Productform';
+import ProductForm from './components/ProductForm';
 import Orders, { OrderDetails } from './components/Orders';
 import { deleteProduct } from './firebase/firestore';
 import { getProducts } from './firebase/firestore';  // For product management
 import { useQuery } from '@tanstack/react-query';
 import styles from './App.module.css';
+import { Product } from './types/types';
 
 const queryClient = new QueryClient();
 

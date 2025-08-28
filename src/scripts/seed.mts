@@ -1,5 +1,4 @@
-import { initializeApp } from 'firebase-admin/app';
-import { cert } from 'firebase-admin/credential';
+import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import fetch from 'node-fetch';
 

@@ -4,6 +4,7 @@ import { getUserOrders, getOrderById } from '../firebase/firestore';
 import { auth } from '../firebase/config';
 import { Link } from 'react-router-dom';
 import styles from './Orders.module.css';
+import { Order, CartItem } from '../types/types';
 
 const Orders: React.FC = () => {
   const userId = auth.currentUser?.uid;
@@ -46,7 +47,7 @@ export const OrderDetails: React.FC<{ orderId: string }> = ({ orderId }) => {
       <p>Date: {order.date.toLocaleDateString()}</p>
       <p>Total: ${order.total.toFixed(2)}</p>
       <ul>
-        {order.products.map(item => (
+        {order.products.map((item: CartItem) => (
           <li key={item.id}>
             {item.title} - Quantity: {item.quantity} - Price: ${item.price.toFixed(2)}
           </li>
