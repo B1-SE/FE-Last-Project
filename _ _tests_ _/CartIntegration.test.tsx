@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, it, expect } from 'vitest';
-import Cart from '../src/pages/Cart';
+import Cart from '../src/components/Cart';
 import ProductItem from '../src/components/ProductItem';
 import { store } from '../src/redux/store';
 import type { Product } from '../src/types/types';
@@ -21,7 +21,7 @@ function renderWithProviders(ui: React.ReactNode) {
 }
 
 describe('Cart integration', () => {
-  it('updates cart count and total when adding a product', () => {
+  it('adds a product to the cart and updates summary', () => {
     const product: Product = {
       id: 'abc',
       title: 'Demo Product',
@@ -32,7 +32,6 @@ describe('Cart integration', () => {
       rating: { rate: 4, count: 10 },
     };
 
-    // Render ProductItem then Cart in the same provider tree (shared store)
     renderWithProviders(
       <div>
         <ProductItem product={product} />
@@ -46,8 +45,11 @@ describe('Cart integration', () => {
     // Add to cart
     fireEvent.click(screen.getByRole('button', { name: /add to cart/i }));
 
-    // Cart should reflect totals
-    expect(screen.getByText(/total items: 1/i)).toBeInTheDocument();
-    expect(screen.getByText(/total price: \$25\.00/i)).toBeInTheDocument();
+    // Cart summary should now show correct totals
+    const cartSummary = screen.getByText(/total items:/i).closest('div')?.parentElement;
+    expect(cartSummary).toBeTruthy();
+    const summaryText = cartSummary?.textContent?.replace(/\s+/g, ' ');
+    expect(summaryText).toMatch(/Total Items: 1/i);
+    expect(summaryText).toMatch(/Total Price: \$25\.00/i);
   });
 });
