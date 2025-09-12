@@ -14,6 +14,7 @@ const ImageWithFallback = ({ src, fallbackSrc, ...props }: ImageWithFallbackProp
   return (
     <img
       src={imgSrc}
+      loading="lazy"
       onError={handleError}
       {...props}
     />

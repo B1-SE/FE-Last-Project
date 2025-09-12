@@ -58,30 +58,52 @@ export const Register: React.FC = () => {
 
   return (
     <div className="auth-container">
-      <form onSubmit={handleRegister} className="auth-form">
-        <h2>Register</h2>
-        {error && <p className="auth-error">{error}</p>}
+      <form onSubmit={handleRegister} className="auth-form" aria-labelledby="register-title">
+        <h2 id="register-title">Register</h2>
+        <div aria-live="polite" aria-atomic="true">
+          {error && <p className="auth-error" role="alert">{error}</p>}
+        </div>
         <div className="form-group">
           <label htmlFor="name">Full Name</label>
-          <input type="text" id="name" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} required />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            autoComplete="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            aria-required="true"
+          />
         </div>
         <div className="form-group">
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            aria-required="true"
+          />
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
+            name="password"
             autoComplete="new-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
+            aria-required="true"
           />
         </div>
-        <button type="submit" className="auth-button" disabled={loading}>
+        <button type="submit" className="auth-button" disabled={loading} aria-busy={loading} aria-label="Register">
           {loading ? 'Registering...' : 'Register'}
         </button>
         <p className="auth-switch">Already have an account? <Link to="/login">Login here</Link></p>
