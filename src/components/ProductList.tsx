@@ -1,29 +1,35 @@
-import React from 'react';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getProducts, getProductsByCategory } from '../firebase/firestore';
+import { getProducts, getProductsByCategory, getCategories } from '../lib/firebase/firestore';
+import CategorySelect from './CategorySelect';
 import ProductItem from './ProductItem';
+import { Product } from '../types/types';
 import styles from './ProductList.module.css';
+import homeStyles from '../pages/Home.module.css';
 
-interface ProductListProps {
-  category?: string;
-}
+const ProductList: React.FC = () => {
+  const [category, setCategory] = useState<string>('');
 
-const ProductList: React.FC<ProductListProps> = ({ category }) => {
-  const queryKey = category ? ['products', category] : ['products'];
-  const queryFn = category ? () => getProductsByCategory(category) : getProducts;
-
-  const { data: products = [], isLoading } = useQuery({
-    queryKey,
-    queryFn,
+  const { data: products = [], isLoading } = useQuery<Product[]>({
+    queryKey: ['products', category],
+    queryFn: () => (category ? getProductsByCategory(category) : getProducts()),
   });
 
-  if (isLoading) return <p>Loading products...</p>;
+  const { data: categories = [] } = useQuery<string[]>({
+    queryKey: ['categories'],
+    queryFn: getCategories,
+  });
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className={styles.list}>
-      {products.map(product => (
-        <ProductItem key={product.id} product={product} />
-      ))}
+    <div className={styles.productList}>
+      <CategorySelect onChange={setCategory} categories={categories} />
+      <div className={homeStyles.productGrid}>
+        {products.map((product: Product) => (
+          <ProductItem key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 };

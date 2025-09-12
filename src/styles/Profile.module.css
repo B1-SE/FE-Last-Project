@@ -1,0 +1,41 @@
+
+.profileContainer {
+  padding: 2rem 0;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.profileContainer h2, .profileContainer h3 {
+  color: #333;
+}
+
+.profileForm {
+  display: grid;
+  gap: 1rem;
+}
+
+.profileForm div {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.profileForm label {
+  font-weight: bold;
+}
+
+.profileForm input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.deleteButton {
+  background: #ef4444;
+  color: white;
+  border: none;
+}

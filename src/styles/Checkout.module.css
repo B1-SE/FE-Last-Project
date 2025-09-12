@@ -1,0 +1,249 @@
+
+
+.checkoutContainer {
+  padding: 2.5rem 0;
+  max-width: 520px;
+  margin: 3rem auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.checkoutTitle {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #222b45;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.itemsList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.itemArticle {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  background: #f7f7fa;
+  width: 95%;
+  max-width: 400px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+
+.itemImage {
+  object-fit: contain;
+  width: 70px;
+  height: 70px;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.itemDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.itemDetails strong {
+  line-height: 1.2;
+  color: #222b45;
+  font-size: 1.08rem;
+}
+
+.itemPriceEach {
+  color: #007bff;
+  font-weight: 500;
+}
+
+.itemControls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.itemControls input {
+  width: 48px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.removeButton {
+  margin-left: 8px;
+  background: #ef4444;
+  border: none;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.removeButton:hover {
+  background: #b91c1c;
+}
+
+.itemLineTotal {
+  text-align: right;
+  font-weight: 600;
+  color: #222b45;
+}
+
+.summarySection {
+  margin-top: 0.5rem;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.15rem;
+  width: 80%;
+  max-width: 350px;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 18px;
+  margin-top: 18px;
+  justify-content: center;
+}
+
+.actionButtons button {
+  padding: 12px 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.actionButtons button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.actionButtons button:hover:not(:disabled) {
+  background: linear-gradient(90deg, #0056b3 0%, #007bff 100%);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.itemsList {
+  display: grid;
+  gap: 1rem;
+}
+
+.itemArticle {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.itemImage {
+  object-fit: contain;
+  width: 80px;
+  height: 80px;
+}
+
+.itemDetails {
+  display: grid;
+  gap: 4px;
+}
+
+.itemDetails strong {
+  line-height: 1.2;
+}
+
+.itemPriceEach {
+  color: #4b5563;
+}
+
+.itemControls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.itemControls input {
+  width: 72px;
+  padding: 4px 8px;
+}
+
+.removeButton {
+  margin-left: 8px;
+  background: transparent;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.itemLineTotal {
+  text-align: right;
+}
+
+.summarySection {
+  margin-top: 0.5rem;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1rem;
+  display: grid;
+  gap: 8px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.actionButtons button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid #6b7280;
+  background: #111827;
+  color: white;
+}
+
+.actionButtons button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.actionButtons button:first-of-type {
+  background: transparent;
+  color: #374151;
+}

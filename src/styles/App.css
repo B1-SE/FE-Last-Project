@@ -1,0 +1,134 @@
+/* Orders - Global Styles
+   Uses the same CSS variable tokens as navbar.css for consistency.
+   If navbar variables are missing, these fallbacks keep it usable.
+*/
+:root {
+  --space-1: var(--space-1, 4px);
+  --space-2: var(--space-2, 8px);
+  --space-3: var(--space-3, 12px);
+  --space-4: var(--space-4, 16px);
+  --space-5: var(--space-5, 20px);
+  --space-6: var(--space-6, 24px);
+
+  --radius: var(--radius, 12px);
+  --shadow-sm: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.08));
+  --shadow-md: var(--shadow-md, 0 6px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.06));
+
+  --fg-rgb: var(--fg-rgb, 23 23 23);
+  --muted-rgb: var(--muted-rgb, 92 92 92);
+  --bg-rgb: var(--bg-rgb, 255 255 255);
+  --border-rgb: var(--border-rgb, 230 230 235);
+  --brand-rgb: var(--brand-rgb, 0 122 255);
+}
+
+.orders {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: calc(var(--space-6) + 4px) var(--space-5);
+  color: rgb(var(--fg-rgb));
+}
+
+.orders--status {
+  text-align: center;
+  color: rgb(var(--muted-rgb));
+}
+
+.orders__title {
+  margin: 0 0 var(--space-5) 0;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.orders__empty {
+  color: rgb(var(--muted-rgb));
+  background: rgb(var(--fg-rgb) / 0.03);
+  border: 1px solid rgb(var(--border-rgb) / 0.8);
+  padding: var(--space-5);
+  border-radius: var(--radius);
+}
+
+.orders__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 700px) {
+  .orders__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.order {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: var(--space-4);
+  background: rgb(var(--bg-rgb) / 0.96);
+  border: 1px solid rgb(var(--border-rgb) / 0.8);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  transition: transform 140ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+.order:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: rgb(var(--border-rgb));
+}
+
+.order__meta {
+  display: grid;
+  gap: var(--space-2);
+  font-size: 0.95rem;
+}
+
+.order__meta p {
+  margin: 0;
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.order__meta span {
+  color: rgb(var(--muted-rgb));
+  min-width: 70px;
+}
+
+.order__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.order__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  color: rgb(var(--bg-rgb));
+  background: rgb(var(--brand-rgb));
+  box-shadow: 0 8px 16px rgb(var(--brand-rgb) / 0.22);
+  transition: transform 120ms ease, box-shadow 150ms ease, background 150ms ease;
+}
+.order__link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgb(var(--brand-rgb) / 0.28);
+}
+
+@media (prefers-color-scheme: dark) {
+  .orders__empty {
+    background: rgb(var(--fg-rgb) / 0.06);
+  }
+}
+
+/* Reduce motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .order,
+  .order__link {
+    transition: none !important;
+  }
+}

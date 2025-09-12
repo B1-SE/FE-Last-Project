@@ -1,36 +1,32 @@
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import ProductItem from '../src/components/ProductItem';
 import { Provider } from 'react-redux';
 import { store } from '../src/redux/store';
-import ProductItem from '../src/components/ProductItem';
-import { Product } from '../src/types/types';
 
-const mockProduct: Product = {
+const product = {
   id: '1',
   title: 'Test Product',
-  price: 10,
-  category: 'test',
-  description: 'desc',
-  image: 'img.jpg',
-  rating: { rate: 4, count: 10 },
+  price: 9.99,
+  category: 'Test Category',
+  description: 'Test Description',
+  image: 'broken-url',
+  rating: { rate: 4.5, count: 10 },
 };
 
-test('renders product details', () => {
-  render(
-    <Provider store={store}>
-      <ProductItem product={mockProduct} />
-    </Provider>
-  );
-  expect(screen.getByText('Test Product')).toBeInTheDocument();
-  expect(screen.getByText('$10.00')).toBeInTheDocument();
-});
-
-test('adds to cart on button click', () => {
-  render(
-    <Provider store={store}>
-      <ProductItem product={mockProduct} />
-    </Provider>
-  );
-  fireEvent.click(screen.getByText('Add to Cart'));
-  // Assert via store state if needed, but for unit, check button exists
-  expect(screen.getByText('Add to Cart')).toBeInTheDocument();
+describe('ProductItem', () => {
+  it('renders product details and fallback image', () => {
+    render(
+      <Provider store={store}>
+        <ProductItem product={product} />
+      </Provider>
+    );
+    expect(screen.getByText('Test Product')).toBeInTheDocument();
+    expect(screen.getByText('Test Category')).toBeInTheDocument();
+    expect(screen.getByText('$9.99')).toBeInTheDocument();
+    // Fallback image
+    const img = screen.getByAltText('Test Product') as HTMLImageElement;
+    fireEvent.error(img);
+    expect(img.src).toContain('via.placeholder.com');
+  });
 });

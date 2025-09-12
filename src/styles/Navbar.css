@@ -1,0 +1,21 @@
+/* Modern navbar styling */
+.navbar {
+	background: #fff;
+	border-bottom: 1px solid #e5e7eb;
+	padding: 18px 32px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 1.1rem;
+	font-weight: 500;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.navbar a {
+	color: #222b45;
+	text-decoration: none;
+	margin: 0 18px;
+	transition: color 0.2s;
+}
+.navbar a:hover {
+	color: #007bff;
+}

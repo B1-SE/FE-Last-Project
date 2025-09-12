@@ -1,0 +1,66 @@
+
+.productManagementContainer {
+  padding: 2rem 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.productForm {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.productForm input,
+.productForm textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+}
+
+.formActions button {
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid transparent;
+}
+
+.formActions button[type="submit"] {
+  background-color: #28a745;
+  color: white;
+}
+
+.formActions button[type="button"] {
+  background-color: #6c757d;
+  color: white;
+}
+
+.productsList table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.productsList th, .productsList td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.productsList th {
+  background-color: #f2f2f2;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+  color: white;
+}

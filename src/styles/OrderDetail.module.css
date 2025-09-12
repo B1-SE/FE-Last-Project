@@ -1,0 +1,53 @@
+
+.orderDetailContainer {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem 0;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.orderMeta {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.orderMeta p {
+  margin: 0.5rem 0;
+}
+
+.itemsGrid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.itemCard {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.itemImage {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemInfo h3 {
+  margin: 0 0 0.5rem;
+}
+
+.itemInfo p {
+  margin: 0.25rem 0;
+}

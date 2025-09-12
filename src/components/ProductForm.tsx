@@ -1,43 +1,80 @@
-import React, { useState } from 'react';
-import { addProduct, updateProduct } from '../firebase/firestore';
-import { Product } from '../types/types';
+import { useState } from 'react';
+import { db } from '../lib/firebase/config';
+import { collection, addDoc } from 'firebase/firestore';
 import styles from './ProductForm.module.css';
+import { Product } from '../types/types';
 
-interface ProductFormProps {
-  product?: Product;  // For edit mode
-  onClose: () => void;
-}
-
-const ProductForm: React.FC<ProductFormProps> = ({ product, onClose }) => {
-  const [title, setTitle] = useState(product?.title || '');
-  const [price, setPrice] = useState(product?.price || 0);
-  const [category, setCategory] = useState(product?.category || '');
-  const [description, setDescription] = useState(product?.description || '');
-  const [image, setImage] = useState(product?.image || '');
-  const [rating, setRating] = useState(product?.rating || { rate: 0, count: 0 });
+const ProductForm = () => {
+  const [product, setProduct] = useState<Omit<Product, 'id' | 'rating'>>({
+    title: '',
+    price: 0,
+    category: '',
+    description: '',
+    image: '',
+  });
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const data = { title, price, category, description, image, rating };
-    if (product) {
-      await updateProduct(product.id, data);
-    } else {
-      await addProduct(data);
+    try {
+      await addDoc(collection(db, 'products'), {
+        ...product,
+        rating: { rate: 0, count: 0 },
+      });
+      setProduct({ title: '', price: 0, category: '', description: '', image: '' });
+      setError(null);
+    } catch (err) {
+      setError('Failed to add product');
+      console.error(err);
     }
-    onClose();
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Title" required />
-      <input type="number" value={price} onChange={e => setPrice(parseFloat(e.target.value))} placeholder="Price" required />
-      <input type="text" value={category} onChange={e => setCategory(e.target.value)} placeholder="Category" required />
-      <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" required />
-      <input type="text" value={image} onChange={e => setImage(e.target.value)} placeholder="Image URL" required />
-      <input type="number" value={rating.rate} onChange={e => setRating({ ...rating, rate: parseFloat(e.target.value) })} placeholder="Rating Rate" required />
-      <input type="number" value={rating.count} onChange={e => setRating({ ...rating, count: parseInt(e.target.value) })} placeholder="Rating Count" required />
-      <button type="submit">{product ? 'Update' : 'Add'} Product</button>
-      <button type="button" onClick={onClose}>Cancel</button>
+    <form className={styles.productForm} onSubmit={handleSubmit}>
+      <input
+        className={styles.input}
+        type="text"
+        value={product.title}
+        onChange={(e) => setProduct({ ...product, title: e.target.value })}
+        placeholder="Title"
+      />
+      <input
+        className={styles.input}
+        type="number"
+        value={product.price}
+        onChange={(e) =>
+          setProduct({
+            ...product,
+            price: e.target.value === '' ? 0 : parseFloat(e.target.value),
+          })
+        }
+        placeholder="Price"
+      />
+      <input
+        className={styles.input}
+        type="text"
+        value={product.category}
+        onChange={(e) => setProduct({ ...product, category: e.target.value })}
+        placeholder="Category"
+      />
+      <input
+        className={styles.input}
+        type="text"
+        value={product.description}
+        onChange={(e) => setProduct({ ...product, description: e.target.value })}
+        placeholder="Description"
+      />
+      <input
+        className={styles.input}
+        type="text"
+        value={product.image}
+        onChange={(e) => setProduct({ ...product, image: e.target.value })}
+        placeholder="Image URL"
+      />
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <button className={styles.button} type="submit">
+        Add Product
+      </button>
     </form>
   );
 };

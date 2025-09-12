@@ -1,23 +1,34 @@
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { store } from '../src/redux/store';
-import App from '../src/App';
+import ProductItem from '../src/components/ProductItem';
+import Cart from '../src/components/Cart';
+import { Product } from '../src/types/types';
 
-const queryClient = new QueryClient();
-
-test('adds product to cart and updates cart', async () => {
-  render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </Provider>
-  );
-  // Assume products load, find an "Add to Cart" button
-  // This may need mocking for firestore, but in TDD, we'd mock
-  // For simplicity, assume it works and test navigation/update
-  fireEvent.click(await screen.findByText('Add to Cart')); // Adjust based on actual
-  fireEvent.click(screen.getByText('Cart'));
-  expect(screen.getByText(/Total Items: 1/)).toBeInTheDocument(); // Approximate
+describe('Cart Integration', () => {
+  it('adds product to cart and updates cart', () => {
+    const product: Product = {
+      id: '1',
+      title: 'Integration Product',
+      price: 19.99,
+      category: 'integration',
+      description: 'Integration test',
+      image: 'broken-url',
+      rating: { rate: 4.5, count: 10 },
+    };
+    render(
+      <Provider store={store}>
+        <>
+          <ProductItem product={product} />
+          <Cart />
+        </>
+      </Provider>
+    );
+    const addButton = screen.getByText('Add to Cart');
+    fireEvent.click(addButton);
+    expect(screen.getByText('Integration Product')).toBeInTheDocument();
+    expect(screen.getByText('Total Items: 1')).toBeInTheDocument();
+    expect(screen.getByText('Total Price: $19.99')).toBeInTheDocument();
+  });
 });
