@@ -17,8 +17,8 @@
     "react-toastify": "^11.0.5"
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
-    "prettier": "^3.2.5",
+    "eslint": "^8.57.1",
+    "prettier": "^3.6.2",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
     "@types/jest": "^29.5.12",
