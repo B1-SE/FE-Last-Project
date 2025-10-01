@@ -11,7 +11,7 @@ import cartReducer from '../src/redux/cartSlice';
 
 describe('ProductItem', () => {
   let store: ReturnType<typeof configureStore>;
-  let dispatchSpy: ReturnType<typeof vi.fn>;
+  let dispatchSpy: any;
 
   const mockProduct: Product = {
     id: 'p1',
@@ -51,6 +51,7 @@ describe('ProductItem', () => {
     );
     fireEvent.click(screen.getByRole('button', { name: /add to cart/i }));
     expect(dispatchSpy).toHaveBeenCalledTimes(1);
-    expect(dispatchSpy).toHaveBeenCalledWith(addToCart({ ...mockProduct, quantity: 1 }));
+    // Cast to 'any' to bypass the type error for test purposes
+    expect(dispatchSpy).toHaveBeenCalledWith(addToCart({ ...mockProduct, quantity: 1 } as any));
   });
 });

@@ -39,6 +39,7 @@
     "vitest": "^3.2.4"
   },
   "scripts": {
+    "dev": "vite",
     "start": "vite",
     "build": "vite build",
     "test": "vitest run",

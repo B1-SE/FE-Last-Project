@@ -2,32 +2,32 @@ name: CI/CD
 
 on:
   push:
-    branches: [main]
+    branches: [main] # 3.b) Triggers workflow on code pushes to main branch
   pull_request:
-    branches: [main]
+    branches: [main] # 3.b) Triggers workflow on pull requests to main branch
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4 # 3.a) Required for CI to access codebase
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        run: npm ci # 3.c) Installs dependencies for build and test
       - name: Build project
-        run: npm run build
+        run: npm run build # 3.c) Builds the project as part of CI
       - name: Run tests
-        run: npm test
+        run: npm test # 3.c, 1.a, 1.b, 1.c, 1.d, 2.a) Runs unit/integration tests; fails workflow if tests fail
 
   deploy:
-    needs: build-and-test
+    needs: build-and-test # 4.c) Ensures deployment only occurs after CI tests pass
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push' && success()
     steps:
       - uses: actions/checkout@v4
       - name: Deploy to Vercel
-        run: npx vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }} # 4.a, 4.b) Deploys to Vercel after successful CI
